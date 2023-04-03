@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project_4_RD"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project_4_RD">
+				<Option output="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Project_4_RD" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/10/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_4_RD"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project_4_RD/fast">
+				<Option output="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Project_4_RD" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/10/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_4_RD/fast"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j16 -f &quot;/mnt/c/Aaron&apos;s\ Folder/Relational_Databases/Project_4_RD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/Database.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/Database.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GHVDLookUp.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GHVDRelation.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GHVDRelation.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GPGRelation.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GPGRelation.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/HashTable.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/HashTable.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/PNBRelation.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/PNBRelation.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/TCRelation.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/TCRelation.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/TPNRelation.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/TPNRelation.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/main.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -109,6 +109,12 @@
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/PNBRelation.h">
 			<Option target="Project_4_RD"/>
 		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/Query.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/Query.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/TCRelation.c">
 			<Option target="Project_4_RD"/>
 		</Unit>
@@ -122,6 +128,9 @@
 			<Option target="Project_4_RD"/>
 		</Unit>
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/main.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/main.h">
 			<Option target="Project_4_RD"/>
 		</Unit>
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/CMakeLists.txt">

@@ -5,6 +5,8 @@
 #include "Database.h"
 #include "HashTable.h"
 #include "GHVDRelation.h"
+#include "Query.h"
+#define CharSize 25
 
 
 
@@ -95,7 +97,6 @@ void loadDatabase(Database database) {
     insertGHVD("9", "Crunch", "Americans", "12 Jan 2023", database);
     insertGHVD("10", "Redwings", "Maple Leafs", "12 Jan 2023", database);
 
-/*
     // GPG Relation
     // Populate Database GPG Relation
     printf("GPG TUPLES:\n \n");
@@ -108,7 +109,7 @@ void loadDatabase(Database database) {
     insertGPG( "8", "87977", "1", database);
     insertGPG("8", "75196", "2", database);
     insertGPG("9", "55870", "3", database);
-    insertGPG("9", "61367", "2", database);*/
+    insertGPG("9", "61367", "2", database);
 
 }
 
@@ -163,7 +164,7 @@ void lookupTPN(char *team, char *playerID, char *number, Database database) {
         while (lookupTPNBucket) {
             // Check: If the playerID matches the playerID in the bucket
             TPN tpn = (TPN)lookupTPNBucket->relationTuple;
-            printf("Team: %s, PlayerID: %s, Number: %s \n", tpn->Team, tpn->PlayerId, tpn->Number);
+            printf("Team: %s\nPlayerID: %s\nNumber: %s \n", tpn->Team, tpn->PlayerId, tpn->Number);
             lookupTPNBucket = lookupTPNBucket->next;
         }
     }
@@ -213,6 +214,11 @@ Bucket lookupGPG(char *gameID, char *playerID, char *goals, Database database) {
     lookup_GPG(gameID, playerID, goals, database->gpgRelation);
 }
 
+void printTCRelation(Database database) {
+    // Call printTCRelation function from HashTable.c
+    printHashTableTC(database->tcRelation->teamHashTable);
+}
+
 
 
 
@@ -252,3 +258,76 @@ void destroyDatabase(Database database) {
     freeGPGRelation(database->gpgRelation);
     free(database);
 }
+
+void qNameNumberREPL(Database database) {
+
+    printf("Enter a Name and Team to Query the PNB Relation for a Player's Jersey Number\n");
+    printf("To Stop the REPL, Enter \"y\" when prompted and anything else to continue\n");
+
+    while(true) {
+
+        char quitInput[CharSize];
+        printf("\nEnter \"y\" to stop the REPL: ");
+        fgets(quitInput, sizeof(quitInput), stdin);
+        quitInput[strcspn(quitInput, "\n")] = '\0';
+
+        if (strcmp(quitInput, "y") == 0) {
+            printf("Exiting Query Name to Number REPL\n");
+            break;
+        }
+
+        else {
+
+            char name[CharSize];
+            printf("Enter a Name:");
+            fgets(name, sizeof(name), stdin);
+            name[strcspn(name, "\n")] = '\0';
+
+            char team[CharSize];
+            printf("Enter a Team:");
+            fgets(team, sizeof(team), stdin);
+            team[strcspn(team, "\n")] = '\0';
+
+            qNameNumber(name, team, database);
+
+
+        }
+
+    }
+
+}
+
+
+
+void qNameGoalsREPL(Database database) {
+
+    printf("Enter a Name and Date to Query the PNB Relation for a Player's Goals Scored\n");
+    printf("To Stop the REPL, Enter \"y\" when prompted and anything else to continue\n");
+
+        while(true) {
+
+            char quitInput[CharSize];
+            printf("\nEnter \"y\" to stop the REPL: ");
+            fgets(quitInput, sizeof(quitInput), stdin);
+            quitInput[strcspn(quitInput, "\n")] = '\0';
+
+            if (strcmp(quitInput, "y") == 0) {
+                printf("Exiting Query Name to Goals REPL\n");
+                break;
+            } else {
+
+                char name[CharSize];
+                printf("Enter a Name:");
+                fgets(name, sizeof(name), stdin);
+                name[strcspn(name, "\n")] = '\0';
+
+                char date[CharSize];
+                printf("Enter a Date:");
+                fgets(date, sizeof(date), stdin);
+                date[strcspn(date, "\n")] = '\0';
+
+                qNameGoals(name, date, database);
+            }
+        }
+}
+

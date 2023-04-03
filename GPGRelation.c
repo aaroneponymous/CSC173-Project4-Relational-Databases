@@ -28,6 +28,7 @@ GPG newGPG(char* gameId, char* playerId, char* goals) {
 
 GPGRelation newGPGRelation(int capacity) {
     GPGRelation gpgRelation = malloc(sizeof(struct GPGRelation));
+    gpgRelation->entries = 0;
     gpgRelation->capacity = capacity;
     gpgRelation->gameIdHashTable = newHashTable(capacity);
     gpgRelation->playerIdHashTable = newHashTable(capacity);
@@ -38,44 +39,123 @@ GPGRelation newGPGRelation(int capacity) {
 // Function to insert a new GPG Tuple into the Relation
 
 bool insert_GPG(char* gameId, char* playerId, char* goals, struct GPGRelation *gpgRelation) {
-    GPG gpg = newGPG(gameId, playerId, goals);
+
     // Check if the GPG Tuple already exists in the Relation
     // If it does, return and do not insert (No duplicates/or multiple PlayerIDs with different name or birthdate)
-    Bucket tuple = lookup_GPG(gameId, playerId, goals, gpgRelation);
+    Bucket tupleBucket = lookup_GPG(gameId, playerId, goals, gpgRelation);
 
-    if (tuple != NULL) {
-        return false;
+    if (!tupleBucket) {
 
+        GPG gpgNew = newGPG(gameId, playerId, goals);
+        printf("\n\nInserting: \n GameID: %s\n PlayerID: %s\n Goals: %s\n", gameId, playerId, goals);
+
+        // Insert into GameID HashTable
+        insert(gpgRelation->gameIdHashTable, gameId, gpgNew);
+        // Insert into PlayerID HashTable
+        insert(gpgRelation->playerIdHashTable, playerId, gpgNew);
+        // Insert into Goals HashTable
+        insert(gpgRelation->goalsHashTable, goals, gpgNew);
+        // Increment the number of entries in the GPG Relation
+        gpgRelation->entries++;
+
+        printf("\n\nDuplicate Doesn't Exist, Insert Successful!\n");
+        printf("Entries in GPG Relation: %d\n\n", gpgRelation->entries);
+        return true;
     }
 
-    // Insert into GameID HashTable
-    insert(gpgRelation->gameIdHashTable, gameId, gpg);
-    // Insert into PlayerID HashTable
-    insert(gpgRelation->playerIdHashTable, playerId, gpg);
-    // Insert into Goals HashTable
-    insert(gpgRelation->goalsHashTable, goals, gpg);
+    printf("\n\nDuplicate Exists, Insert Unsuccessful!\n");
+    printf("Entries in GPG Relation: %d\n\n", gpgRelation->entries);
 
-    return true;
+    return false;
+
 }
 
 // Look Up Function
 
 Bucket lookup_GPG(char* gameId, char* playerId, char* goals, struct GPGRelation *gpgRelation) {
-    // Accommodate for when user enters asterisk to return tuples that match
 
-    // If GameID is not *
-    if (strcmp(gameId, "*") != 0 && strcmp(playerId, "*") != 0 && strcmp(goals, "*") != 0) {
-        // Look up in GameID HashTable
-        Bucket bucket = lookUpBucket(gpgRelation->gameIdHashTable, gpgRelation->capacity, gameId);
+    // gameID Asterisk
+    bool gameIDAsterisk = strcmp(gameId, "*") == 0;
+    // playerID Asterisk
+    bool playerIDAsterisk = strcmp(playerId, "*") == 0;
+    // goals Asterisk
+    bool goalsAsterisk = strcmp(goals, "*") == 0;
+
+    // Parameters: gameId, playerId, goals
+    // Can be any combination of asterisks and values
+    // If all asterisks, return getAllBucket()
+    // 2^3 = 8 cases
+
+    // Case 1: gameID = *, playerID = *, goals = *
+    if (gameIDAsterisk && playerIDAsterisk && goalsAsterisk) {
+        return getAllBuckets(gpgRelation->gameIdHashTable);
+    }
+
+    // Case 2: gameID = *, playerID = *, goals = value
+    if (gameIDAsterisk && playerIDAsterisk && !goalsAsterisk) {
+        return lookUpBucket(gpgRelation->goalsHashTable, gpgRelation->capacity, goals);
+    }
+
+    // Case 3: gameID = *, playerID = value, goals = *
+    if (gameIDAsterisk && !playerIDAsterisk && goalsAsterisk) {
+        return lookUpBucket(gpgRelation->playerIdHashTable, gpgRelation->capacity, playerId);
+    }
+
+    // Case 4: gameID = *, playerID = value, goals = value
+    if (gameIDAsterisk && !playerIDAsterisk && !goalsAsterisk) {
+        Bucket bucket = lookUpBucket(gpgRelation->playerIdHashTable, gpgRelation->capacity, playerId);
         while (bucket != NULL) {
             GPG gpg = (GPG) bucket->relationTuple;
-            if (strcmp(gpg->GameId, gameId) == 0 && strcmp(gpg->PlayerId, playerId) == 0 &&
-                strcmp(gpg->Goals, goals) == 0) {
-                printGPG(bucket);
+            if (strcmp(gpg->Goals, goals) == 0) {
                 return bucket;
             }
             bucket = bucket->next;
         }
+        return NULL;
+    }
+
+    // Case 5: gameID = value, playerID = *, goals = *
+    if (!gameIDAsterisk && playerIDAsterisk && goalsAsterisk) {
+        return lookUpBucket(gpgRelation->gameIdHashTable, gpgRelation->capacity, gameId);
+    }
+
+    // Case 6: gameID = value, playerID = *, goals = value
+    if (!gameIDAsterisk && playerIDAsterisk && !goalsAsterisk) {
+        Bucket bucket = lookUpBucket(gpgRelation->gameIdHashTable, gpgRelation->capacity, gameId);
+        while (bucket != NULL) {
+            GPG gpg = (GPG) bucket->relationTuple;
+            if (strcmp(gpg->Goals, goals) == 0) {
+                return bucket;
+            }
+            bucket = bucket->next;
+        }
+        return NULL;
+    }
+
+    // Case 7: gameID = value, playerID = value, goals = *
+    if (!gameIDAsterisk && !playerIDAsterisk && goalsAsterisk) {
+        Bucket bucket = lookUpBucket(gpgRelation->gameIdHashTable, gpgRelation->capacity, gameId);
+        while (bucket != NULL) {
+            GPG gpg = (GPG) bucket->relationTuple;
+            if (strcmp(gpg->PlayerId, playerId) == 0) {
+                return bucket;
+            }
+            bucket = bucket->next;
+        }
+        return NULL;
+    }
+
+    // Case 8: gameID = value, playerID = value, goals = value
+    if (!gameIDAsterisk && !playerIDAsterisk && !goalsAsterisk) {
+        Bucket bucket = lookUpBucket(gpgRelation->gameIdHashTable, gpgRelation->capacity, gameId);
+        while (bucket != NULL) {
+            GPG gpg = (GPG) bucket->relationTuple;
+            if (strcmp(gpg->PlayerId, playerId) == 0 && strcmp(gpg->Goals, goals) == 0) {
+                return bucket;
+            }
+            bucket = bucket->next;
+        }
+        return NULL;
     }
 
     return NULL;

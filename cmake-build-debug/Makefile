@@ -273,6 +273,30 @@ PNBRelation.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/PNBRelation.c.s
 .PHONY : PNBRelation.c.s
 
+Query.o: Query.c.o
+.PHONY : Query.o
+
+# target to build an object file
+Query.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/Query.c.o
+.PHONY : Query.c.o
+
+Query.i: Query.c.i
+.PHONY : Query.i
+
+# target to preprocess a source file
+Query.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/Query.c.i
+.PHONY : Query.c.i
+
+Query.s: Query.c.s
+.PHONY : Query.s
+
+# target to generate assembly for a file
+Query.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/Query.c.s
+.PHONY : Query.c.s
+
 TCRelation.o: TCRelation.c.o
 .PHONY : TCRelation.o
 
@@ -372,6 +396,9 @@ help:
 	@echo "... PNBRelation.o"
 	@echo "... PNBRelation.i"
 	@echo "... PNBRelation.s"
+	@echo "... Query.o"
+	@echo "... Query.i"
+	@echo "... Query.s"
 	@echo "... TCRelation.o"
 	@echo "... TCRelation.i"
 	@echo "... TCRelation.s"

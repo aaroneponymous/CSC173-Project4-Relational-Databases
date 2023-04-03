@@ -47,6 +47,11 @@ extern void loadDatabase(Database database);
 extern void destroyDatabase(Database database);
 // Print Each Tuple in the Relation
 extern void printAll(Database database);
+extern void printTCRelation(Database database);
+
+
+extern void qNameNumberREPL(Database database);
+extern void qNameGoalsREPL(Database database);
 
 
 #endif

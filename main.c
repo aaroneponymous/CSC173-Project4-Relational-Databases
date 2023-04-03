@@ -5,46 +5,132 @@
 
 #include "Database.h"
 #include "Hashtable.h"
+#include "Query.h"
+
+void partA() {
+        printf("\n----------------------------Part A----------------------------\n");
+        Database database = createDatabase(MAX_TABLE_SIZE, "CSC173 RELATIONAL DATABASE");
+        loadDatabase(database);
+
+        // (a) lookup(⟨“Americans”, 61367, 99⟩, Team-PlayerId-Number)
+        printf("\n----------Testing Lookup Function for TPN Relation-------------\n");
+        printf("Looking up TPN Tuple with Team: Americans, PlayerID: 61367, Number: 99\n\n");
+        lookupTPN("Americans", "61367", "99", database);
+        // (b) lookup(⟨“Crunch”, 51213, ∗⟩, Team-PlayerId-Number)
+        printf("\n----------Testing Lookup Function for TPN Relation-------------\n");
+        printf("Looking up TPN Tuple with Team: Crunch, PlayerID: 51213, Number: *\n\n");
+        lookupTPN("Crunch", "51213", "*", database);
+        // (c) lookup(⟨“Americans”, “Toronto”⟩, Team-City)
+        printf("\n----------Testing Lookup Function for TC Relation-------------\n");
+        printf("Looking up TC Tuple with Team: Americans, City: Toronto\n\n");
+        lookupTC("Americans", "Toronto", database);
 
 
+        printf("\n----------Testing Insertion-------------\n");
+        // (g) insert(⟨“Ice Pilots”, “Pensacola”⟩, Team-City)
+        insertTC("Ice Pilots", "Pensacola", database);
+        printf("TC Relation after Insertion:\n");
+        printTCRelation(database);
+        // (h) insert(⟨“Crunch”, “Syracuse”⟩, Team-City)
+        insertTC("Crunch", "Syracuse", database);
+        printf("TC Relation after Insertion:\n");
+        printTCRelation(database);
+
+        destroyDatabase(database);
+
+        printf("\n--------------------------------------------------------------\n");
 
 
+}
+
+void partB() {
+    printf("\n----------------------------Part B----------------------------\n");
+    Database database = createDatabase(MAX_TABLE_SIZE, "CSC173 RELATIONAL DATABASE");
+    loadDatabase(database);
+
+    // Call the REPL for the PNB Relation
+    printf("\n----------Testing REPL for PNB Relation-------------\n");
+    qNameNumberREPL(database);
+    // Call the REPL for the TPN Relation
+    printf("\n----------Testing REPL for TPN Relation-------------\n");
+    qNameGoalsREPL(database);
+
+    qNameGoals("A. Moore", "3 Jan 2023", database);
+
+    qNameGoals("T. Sullivan", "3 Jan 2023", database);
+
+    destroyDatabase(database);
+
+    printf("\n-------------------------------------------------------------\n");
+}
+
+
+int main() {
+    clock_t start_time = clock();
+    partA();
+    partB();
+    clock_t end_time = clock();
+    double time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
+    printf("Time taken: %f seconds \n", time);
+    return 0;
+
+}
+/*
 int main() {
 
     clock_t start_time = clock();
 
 
-    // Create Database
-    Database database = createDatabase(MAX_TABLE_SIZE, "CSC173 RELATIONAL DATABASE");
 
-    // Load Database
-    loadDatabase(database);
-
-
+*/
+/*
     printf("\n\n\n\n---------------------------------------------Look Up Tuples:----------------------------------------------\n\n\n\n");
 
     // Look Up Tuples
     // GHVD
-    lookupGHVD("*", "Dragon", "Americans", "*", database);
-    lookupGHVD("5", "", "", "8 Jan 2023", database);
-    lookupGHVD("", "", "*", "3 Jan 2023", database);
+    printf("Query 1: \n");
+    lookupGHVD("5", "*", "*", "8 Jan 2023", database);
+    printf("\nQuery 2: \n");
+    lookupGHVD("*", "*", "*", "3 Jan 2023", database);
+    printf("\nQuery 3: \n");
     lookupGHVD("2", "Crunch", "Redwings", "*", database);
+    printf("\nQuery 4: \n");
     lookupGHVD("4", "Redwings", "*", "6 Jan 2023", database);
 
 
+    // Query Function
+    printf("------------------------------------------------NAME - TEAM --> Number------------------------------------------------\n\n\n\n");
+
+    qNameNumber("A. Moore", "Americans", database);
+
+    // Query Function NAME - DATE --> Goal
+    printf("------------------------------------------------NAME - DATE --> Goals------------------------------------------------\n\n\n\n");
+
+    qNameGoals("A. Moore", "12 Jan 2023", database);
+
+
+*//*
 
 
 
 
-    /*  // Print Database
+
+
+
+    */
+/*  // Print Database
       printf("\n\n\n\nPrinting All Relations: \n");
-      printAll(database);*/
+      printAll(database);*//*
 
+
+*/
 /*    // Test qNameTeam Function
     printf("\n\n\n\nRunning Query for T. Sullivan and Crunch\n\n");
-    qNameTeam("T. Sullivan", "Crunch", database);*/
+    qNameTeam("T. Sullivan", "Crunch", database);*//*
 
 
+
+*/
 /*    Bucket tpnBucket = lookup_TPN("Crunch", "51213", "11", database->tpnRelation);
 
     while(tpnBucket) {
@@ -52,11 +138,12 @@ int main() {
         // Print the Team, PlayerID, and Number
         printf("\n\nTeam: %s, PlayerID: %s, Number: %s", tpnTest->Team, tpnTest->PlayerId, tpnTest->Number);
         tpnBucket = tpnBucket->next;
-    }*/
+    }*//*
+
 
     // Destroy Database
 
-    destroyDatabase(database);
+
 
     clock_t end_time = clock();
 
@@ -73,6 +160,7 @@ int main() {
 
 
 
+*/
 /*
     // PNB Relation
 
@@ -165,11 +253,13 @@ int main() {
     freeGHVDRelation(ghvdRelation);
     freeGPGRelation(gpgRelation);
 
+*//*
+
+
+
+
+
 */
-
-
-
-
 /*
 
 // Test PNBRelation

@@ -58,4 +58,5 @@ CMakeFiles/Project_4_RD.dir/Database.c.o: \
  /mnt/c/Aaron's\ Folder/Relational_Databases/Project_4_RD/TPNRelation.h \
  /mnt/c/Aaron's\ Folder/Relational_Databases/Project_4_RD/TCRelation.h \
  /mnt/c/Aaron's\ Folder/Relational_Databases/Project_4_RD/GHVDRelation.h \
- /mnt/c/Aaron's\ Folder/Relational_Databases/Project_4_RD/GPGRelation.h
+ /mnt/c/Aaron's\ Folder/Relational_Databases/Project_4_RD/GPGRelation.h \
+ /mnt/c/Aaron's\ Folder/Relational_Databases/Project_4_RD/Query.h

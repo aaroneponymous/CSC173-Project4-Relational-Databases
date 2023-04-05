@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #ifndef HashTable_h
 #define HashTable_h
@@ -36,6 +37,13 @@ extern void insert(HashTable table, char *key, void *relationTuple);
 // Look Up a relationTuple in the HashTable and return the Bucket
 extern Bucket lookUpBucket(HashTable table, int capacity, void *value);
 
+extern bool deleteBucket(HashTable table, char *key, void *relationTuple);
+
+extern bool deleteBucketandTuple(HashTable table, char *key, void *relationTuple);
+
+extern void deleteAllBuckets(HashTable table);
+
+
 
 // Get All Populated Buckets
 extern Bucket getAllBuckets(HashTable hashTable);
@@ -53,6 +61,7 @@ extern void printHashTableGPG(HashTable table);
 
 // Free the HashTable
 extern void freeHashTable(HashTable table);
+extern void freeAllTuples(HashTable table);
 
 
 #endif

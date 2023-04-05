@@ -34,11 +34,12 @@ extern PNBRelation newPNBRelation(int capacity);
 
 extern void printPNB(Bucket PNB);
 
+extern bool insert_PNB(char* playerId, char* name, char* birthDate, struct PNBRelation *pnbRelation);
+
 extern Bucket lookup_PNB(char* playerID, char* name, char* birthDate, struct PNBRelation *pnbRelation);
 
 extern bool delete_PNB(char* playerId, char* name, char* birthDate, struct PNBRelation *pnbRelation);
 
-extern bool insert_PNB(char* playerId, char* name, char* birthDate, struct PNBRelation *pnbRelation);
 
 extern void freePNBRelation(PNBRelation pnbRelation);
 

@@ -156,7 +156,212 @@ Bucket lookup_TPN(char* team, char* playerId, char* number, struct TPNRelation *
 
 }
 
-bool delete_TPN(char* team, char* playerId, char* number, struct TPNRelation *tpnRelation);
+bool delete_TPN(char* team, char* playerId, char* number, struct TPNRelation *tpnRelation) {
+
+    // Team Asterisk
+    bool teamIsAsterisk = strcmp(team, "*") == 0;
+    // PlayerID Asterisk
+    bool playerIdIsAsterisk = strcmp(playerId, "*") == 0;
+    // Number Asterisk
+    bool numberIsAsterisk = strcmp(number, "*") == 0;
+
+    // 1. team = *, playerId = *, number = *
+    // If all the parameters are asterisks, then have to return all the tuples in the relation
+    if (teamIsAsterisk && playerIdIsAsterisk && numberIsAsterisk) {
+
+        // Delete the tuple from all the hash tables
+        deleteAllBuckets(tpnRelation->teamHashTable);
+        deleteAllBuckets(tpnRelation->playerIDHashTable);
+        freeAllTuples(tpnRelation->numberHashTable);
+
+        return true;
+    }
+
+    Bucket deleteTPNBucket = lookup_TPN(team, playerId, number, tpnRelation);
+
+    // Parameters: team, playerId, number passed to the lookup_TPN function
+    // Can be of various combinations:
+    // They can either take "*" as a parameter, or a specific value
+
+    // List of all possible combinations of parameters
+
+
+
+    // 2. team = *, playerId = *, number = specific value
+    if (teamIsAsterisk && playerIdIsAsterisk && !numberIsAsterisk) {
+
+        TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+
+        while (deleteTPNBucket) {
+
+            char *numberTuple = deleteTupleTPN->Number;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(numberTuple, number) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+    }
+
+    // 3. team = *, playerId = specific value, number = *
+    if (teamIsAsterisk && !playerIdIsAsterisk && numberIsAsterisk) {
+
+        TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+
+        while (deleteTPNBucket) {
+
+            char *playerIdTuple = deleteTupleTPN->PlayerId;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(playerIdTuple, playerId) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    // 4. team = specific value, playerId = *, number = *
+    if (!teamIsAsterisk && playerIdIsAsterisk && numberIsAsterisk) {
+
+
+
+        while (deleteTPNBucket) {
+            TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+            char *teamTuple = deleteTupleTPN->Team;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(teamTuple, team) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+
+    }
+
+
+    // 5. team = specific value, playerId = specific value, number = *
+    if (!teamIsAsterisk && !playerIdIsAsterisk && numberIsAsterisk) {
+
+        while (deleteTPNBucket) {
+
+            TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+            char *teamTuple = deleteTupleTPN->Team;
+            char *playerIdTuple = deleteTupleTPN->PlayerId;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(teamTuple, team) == 0 && strcmp(playerIdTuple, playerId) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    // 6. team = specific value, playerId = *, number = specific value
+    if (!teamIsAsterisk && playerIdIsAsterisk && !numberIsAsterisk) {
+
+
+
+        while (deleteTPNBucket) {
+            TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+            char *teamTuple = deleteTupleTPN->Team;
+            char *numberTuple = deleteTupleTPN->Number;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(teamTuple, team) == 0 && strcmp(numberTuple, number) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    // 7. team = *, playerId = specific value, number = specific value
+    if (teamIsAsterisk && !playerIdIsAsterisk && !numberIsAsterisk) {
+
+
+
+        while (deleteTPNBucket) {
+            TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+            char *playerIdTuple = deleteTupleTPN->PlayerId;
+            char *numberTuple = deleteTupleTPN->Number;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(playerIdTuple, playerId) == 0 && strcmp(numberTuple, number) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+
+
+    }
+
+    // 8. team = specific value, playerId = specific value, number = specific value
+    if (!teamIsAsterisk && !playerIdIsAsterisk && !numberIsAsterisk) {
+
+
+
+        while (deleteTPNBucket) {
+            TPN deleteTupleTPN = (TPN) deleteTPNBucket->relationTuple;
+            char *teamTuple = deleteTupleTPN->Team;
+            char *playerIdTuple = deleteTupleTPN->PlayerId;
+            char *numberTuple = deleteTupleTPN->Number;
+
+            deleteTPNBucket = deleteTPNBucket->next;
+
+            if (strcmp(teamTuple, team) == 0 && strcmp(playerIdTuple, playerId) == 0 && strcmp(numberTuple, number) == 0) {
+                deleteBucket(tpnRelation->teamHashTable, deleteTupleTPN->Team, deleteTupleTPN);
+                deleteBucket(tpnRelation->playerIDHashTable, deleteTupleTPN->PlayerId, deleteTupleTPN);
+                deleteBucketandTuple(tpnRelation->numberHashTable, deleteTupleTPN->Number, deleteTupleTPN);
+                tpnRelation->entries--;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    return NULL;
+}
 
 // Free TPN Relation
 void freeTPNRelation(struct TPNRelation *tpnRelation) {

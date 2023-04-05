@@ -103,16 +103,66 @@ Bucket getAllBuckets(HashTable hashTable) {
 }
 
 
-// @TODO: Implement this function: In the Relations Delete Functions
-// @TODO: Relation Delete Functions check the tuple's existence
-// @TODO: if yes, then it frees the tuple and then calls
-// @TODO: deleteBucket to delete the bucket and maintain the
-// @TODO: integrity of the Bucket List
-// @TODO: And then that functions moves on bucket->next
-// @TODO: and repeats the process
-/*bool deleteBucket(HashTable hashTable, Bucket bucket) {
-    free(bucket);
-}*/
+
+
+// Delete a Bucket from the HashTable and free memory
+bool deleteBucket(HashTable table, char *key, void *relationTuple) {
+    int index = hashFunction(key, table->capacity);
+    Bucket current = table->table[index];
+    Bucket prev = NULL;
+
+    while (current != NULL) {
+        if (current->relationTuple == relationTuple) {
+            // Found the bucket to delete
+            if (prev == NULL) {
+                // Bucket to delete is the first bucket in the list
+                table->table[index] = current->next;
+            } else {
+                // Bucket to delete is not the first bucket in the list
+                prev->next = current->next;
+            }
+            free(current);
+            table->entries -= 1;
+            return true;
+        }
+        prev = current;
+        current = current->next;
+    }
+
+    // Bucket not found
+    return false;
+}
+
+bool deleteBucketandTuple(HashTable table, char *key, void *relationTuple) {
+    int index = hashFunction(key, table->capacity);
+    Bucket current = table->table[index];
+    Bucket prev = NULL;
+
+    while (current != NULL) {
+        if (current->relationTuple == relationTuple) {
+            // Found the bucket to delete
+            if (prev == NULL) {
+                // Bucket to delete is the first bucket in the list
+                table->table[index] = current->next;
+            } else {
+                // Bucket to delete is not the first bucket in the list
+                prev->next = current->next;
+            }
+            free(current->relationTuple);
+            free(current);
+            table->entries -= 1;
+            return true;
+        }
+        prev = current;
+        current = current->next;
+    }
+
+    // Bucket not found
+    return false;
+}
+
+
+
 
 // Print the HashTable PIB
 void printHashTablePNB(HashTable table) {
@@ -130,9 +180,12 @@ void printHashTablePNB(HashTable table) {
 
 // Print the HashTable TPN
 void printHashTableTPN(HashTable table) {
+    printf("\n\nPrinting TPN Relation Tuples:\n");
+    printf("\nEntries in TPN Relation: %d\n\n", table->entries);
     for (int i = 0; i < table->capacity; i++) {
         Bucket current = table->table[i];
         while (current != NULL) {
+            printf("\nEntry at Index: %d\n", i);
             printTPN(current);
             current = current->next;
         }
@@ -170,6 +223,41 @@ void printHashTableGPG(HashTable table) {
             current = current->next;
         }
     }
+}
+
+// Delete All Buckets from the HashTable
+
+void deleteAllBuckets(HashTable table) {
+    for (int i = 0; i < table->capacity; i++) {
+        Bucket current = table->table[i];
+        while (current != NULL) {
+            Bucket temp = current;
+            current = current->next;
+            free(temp);
+            temp = NULL;
+        }
+
+        table->table[i] = NULL;
+    }
+
+    table->entries = 0;
+}
+
+void freeAllTuples(HashTable table) {
+    for (int i = 0; i < table->capacity; i++) {
+        Bucket current = table->table[i];
+        while (current != NULL) {
+            Bucket temp = current;
+            current = current->next;
+            free(temp->relationTuple);
+            free(temp);
+            temp = NULL;
+        }
+
+        table->table[i] = NULL;
+    }
+
+    table->entries = 0;
 }
 
 // Free the HashTable

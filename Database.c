@@ -114,7 +114,6 @@ void loadDatabase(Database database) {
 }
 
 // Insert Functions
-
 bool insertPNB(char *playerID, char *name, char *birthDate, Database database) {
     // Call insertPNBRelation function from pnbRelation.c
     // printf("Inserting PNB Tuple: \nPlayerID: %s \nName: %s \nBirthDate: %s \n", playerID, name, birthDate);
@@ -138,10 +137,38 @@ bool insertGPG(char *gameID, char *playerID, char *goals, Database database) {
     return insert_GPG(gameID, playerID, goals, database->gpgRelation);
 }
 
-void lookupPNB(char *playerID, char *name, char*birthDate, Database database) {
+// Look Up Functions
+void lookupPNB(char *playerID, char *name, char *birthDate, Database database) {
     // Call lookupPNBRelation function from pnbRelation.c
     Bucket lookupPNBBucket = lookup_PNB(playerID, name, birthDate, database->pnbRelation);
-    if (lookupPNBBucket) {
+
+    // If both name and birthDate are not * then do something
+    if (strcmp(name, "*") != 0 && strcmp(birthDate, "*") != 0) {
+
+        if (lookupPNBBucket) {
+            printf("\nResults Found:\n");
+        }
+
+        while (lookupPNBBucket->next) {
+            // Check: If the name and birthDate match the name and birthDate in the bucket
+            PNB pnbFirst = (PNB)lookupPNBBucket->relationTuple;
+
+            printf("\nPlayerID: %s, \nName: %s, \nBirthDate: %s \n", pnbFirst->PlayerId, pnbFirst->Name, pnbFirst->BirthDate);
+
+            PNB pnbSecond = (PNB)lookupPNBBucket->next->relationTuple;
+
+
+            if (strcmp(pnbFirst->Name, pnbSecond->Name) == 0 && strcmp(pnbFirst->BirthDate, pnbSecond->BirthDate) == 0) {
+                lookupPNBBucket = lookupPNBBucket->next;
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+
+    else if (lookupPNBBucket) {
         printf("\nResults Found:\n");
         while (lookupPNBBucket) {
             // Check: If the name matches the name in the bucket
@@ -156,10 +183,11 @@ void lookupPNB(char *playerID, char *name, char*birthDate, Database database) {
     }
 
 }
-
 void lookupTPN(char *team, char *playerID, char *number, Database database) {
     // Call lookupTPNRelation function from tpnRelation.c
     Bucket lookupTPNBucket = lookup_TPN(team, playerID, number, database->tpnRelation);
+
+
     if (lookupTPNBucket) {
         while (lookupTPNBucket) {
             // Check: If the playerID matches the playerID in the bucket
@@ -173,8 +201,7 @@ void lookupTPN(char *team, char *playerID, char *number, Database database) {
         printf("\nNo Records Found\n");
     }
 }
-
-Bucket lookupTC(char *team, char *city, Database database) {
+void lookupTC(char *team, char *city, Database database) {
     // Call lookupTCRelation function from tcRelation.c
     Bucket lookupTCBucket = lookup_TC(team, city, database->tcRelation);
     if(lookupTCBucket) {
@@ -190,8 +217,7 @@ Bucket lookupTC(char *team, char *city, Database database) {
         printf("\nNo Records Found\n");
     }
 }
-
-Bucket lookupGHVD(char *gameID, char *homeTeam, char *visitorTeam, char *date, Database database) {
+void lookupGHVD(char *gameID, char *homeTeam, char *visitorTeam, char *date, Database database) {
     // Call lookupGHVDRelation function from ghvdRelation.c
     Bucket lookupGHVDBucket = lookup_GHVD(gameID, homeTeam, visitorTeam, date, database->ghvdRelation);
     if (lookupGHVDBucket) {
@@ -208,16 +234,131 @@ Bucket lookupGHVD(char *gameID, char *homeTeam, char *visitorTeam, char *date, D
     }
 
 }
-
-Bucket lookupGPG(char *gameID, char *playerID, char *goals, Database database) {
+void lookupGPG(char *gameID, char *playerID, char *goals, Database database) {
     // Call lookupGPGRelation function from gpgRelation.c
     lookup_GPG(gameID, playerID, goals, database->gpgRelation);
+}
+
+// Delete Functions
+void deletePNB(char *playerID, char *name, char *birthDate, Database database) {
+    // Call delete_PNB from PNB relation file
+    delete_PNB(playerID, name, birthDate, database->pnbRelation);
+    printPNBRelation(database);
+}
+void deletePNBREPL(Database database) {
+
+    printf("Enter Player ID, Name and BirthDate to Delete:\n");
+    printf("To Stop the REPL, Enter \"y\" when prompted and anything else to continue\n");
+
+    while(true) {
+
+        char quitInput[CharSize];
+        printf("\nEnter \"y\" to stop the REPL: ");
+        fgets(quitInput, sizeof(quitInput), stdin);
+        quitInput[strcspn(quitInput, "\n")] = '\0';
+
+        if (strcmp(quitInput, "y") == 0) {
+            printf("Exiting Query Name to Number REPL\n");
+            break;
+        }
+
+        else {
+
+            char playerID[CharSize];
+            printf("Enter a Player ID:");
+            fgets(playerID, sizeof(playerID), stdin);
+            playerID[strcspn(playerID, "\n")] = '\0';
+
+
+            char name[CharSize];
+            printf("Enter a Name:");
+            fgets(name, sizeof(name), stdin);
+            name[strcspn(name, "\n")] = '\0';
+
+            char birthDate[CharSize];
+            printf("Enter a BirthDate:");
+            fgets(birthDate, sizeof(birthDate), stdin);
+            birthDate[strcspn(birthDate, "\n")] = '\0';
+
+            if (delete_PNB(playerID, name, birthDate, database->pnbRelation)) {
+                printf("Deleted Successfully\n");
+                printHashTablePNB(database->pnbRelation->playerIDHashTable);
+                printHashTablePNB(database->pnbRelation->nameHashTable);
+                printHashTablePNB(database->pnbRelation->birthDateHashTable);
+            }
+
+            else {
+                printf("Delete Failed\n");
+            }
+
+        }
+
+    }
+
+}
+
+void deleteTPN(char *team, char *playerID, char *number, Database database) {
+    // Call delete_TPN from TPN relation file
+    delete_TPN(team, playerID, number, database->tpnRelation);
+    printTPNRelation(database);
+}
+void deleteTPNREPL(Database database) {
+
+    printf("Enter Team, Player ID and Number to Delete:\n");
+    printf("To Stop the REPL, Enter \"y\" when prompted and anything else to continue\n");
+
+    while(true) {
+
+        char quitInput[CharSize];
+        printf("\nEnter \"y\" to stop the REPL: ");
+        fgets(quitInput, sizeof(quitInput), stdin);
+        quitInput[strcspn(quitInput, "\n")] = '\0';
+
+        if (strcmp(quitInput, "y") == 0) {
+            printf("Exiting Query Name to Number REPL\n");
+            break;
+        }
+
+        else {
+
+            char team[CharSize];
+            printf("Enter a Team:");
+            fgets(team, sizeof(team), stdin);
+            team[strcspn(team, "\n")] = '\0';
+
+            char playerID[CharSize];
+            printf("Enter a Player ID:");
+            fgets(playerID, sizeof(playerID), stdin);
+            playerID[strcspn(playerID, "\n")] = '\0';
+
+            char number[CharSize];
+            printf("Enter a Number:");
+            fgets(number, sizeof(number), stdin);
+            number[strcspn(number, "\n")] = '\0';
+
+            deleteTPN(team, playerID, number, database);
+
+        }
+    }
+}
+
+
+
+void printPNBRelation(Database database) {
+    // Call printHashTablePNB function from HashTable
+    printHashTablePNB(database->pnbRelation->playerIDHashTable);
+}
+
+void printTPNRelation(Database database) {
+    // Call printHashTableTPN function from HashTable
+    printHashTableTPN(database->tpnRelation->teamHashTable);
 }
 
 void printTCRelation(Database database) {
     // Call printTCRelation function from HashTable.c
     printHashTableTC(database->tcRelation->teamHashTable);
 }
+
 
 
 
@@ -249,7 +390,6 @@ void printAll(Database database) {
     printHashTableGPG(gpgRelation);
 
 }
-
 void destroyDatabase(Database database) {
     freePNBRelation(database->pnbRelation);
     freeTPNRelation(database->tpnRelation);
@@ -258,7 +398,6 @@ void destroyDatabase(Database database) {
     freeGPGRelation(database->gpgRelation);
     free(database);
 }
-
 void qNameNumberREPL(Database database) {
 
     printf("Enter a Name and Team to Query the PNB Relation for a Player's Jersey Number\n");
@@ -296,9 +435,6 @@ void qNameNumberREPL(Database database) {
     }
 
 }
-
-
-
 void qNameGoalsREPL(Database database) {
 
     printf("Enter a Name and Date to Query the PNB Relation for a Player's Goals Scored\n");

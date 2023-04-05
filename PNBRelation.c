@@ -117,7 +117,8 @@ Bucket lookup_PNB(char* playerId, char* playerName, char* birthDate, struct PNBR
         while (bucket) {
             PNB pnbTuple = bucket->relationTuple;
             char *pnbTupleBirthDate = pnbTuple->BirthDate;
-            if (strcmp(pnbTupleBirthDate, birthDate) == 0) {
+            char *pnbTuplePlayerName = pnbTuple->Name;
+            if (strcmp(pnbTupleBirthDate, birthDate) == 0 && strcmp(pnbTuplePlayerName, playerName) == 0) {
                 return bucket;
             }
             bucket = bucket->next;
@@ -177,8 +178,68 @@ Bucket lookup_PNB(char* playerId, char* playerName, char* birthDate, struct PNBR
 // Delete Function
 bool delete_PNB(char* playerId, char* playerName, char* birthDate, struct PNBRelation *pnbRelation) {
 
-}
+    Bucket deletePNBTupleBucket = lookup_PNB(playerId, playerName, birthDate, pnbRelation);
 
+    // If both name and birthDate are not * then do something
+    if (strcmp(playerId, "*") == 0 && strcmp(playerName, "*") != 0 && strcmp(birthDate, "*") != 0) {
+
+        while (deletePNBTupleBucket->next) {
+            // Check: If the name and birthDate match the name and birthDate in the bucket
+            PNB pnbFirst = (PNB)deletePNBTupleBucket->relationTuple;
+            PNB pnbSecond = (PNB)deletePNBTupleBucket->next->relationTuple;
+            char *playerIDDelete = pnbFirst->PlayerId;
+            char *playerNameDelete = pnbFirst->Name;
+            char *playerBirthDate = pnbFirst->BirthDate;
+
+            deleteBucket(pnbRelation->playerIDHashTable, pnbFirst->PlayerId, pnbFirst);
+            deleteBucket(pnbRelation->nameHashTable, pnbFirst->Name, pnbFirst);
+            deleteBucketandTuple(pnbRelation->birthDateHashTable, pnbFirst->BirthDate, pnbFirst);
+            pnbRelation->entries--;
+
+
+
+
+
+
+            if (strcmp(playerNameDelete, pnbSecond->Name) == 0 && strcmp(playerBirthDate, pnbSecond->BirthDate) == 0) {
+                deletePNBTupleBucket = deletePNBTupleBucket->next;
+
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+
+    else if (deletePNBTupleBucket) {
+
+
+        while (deletePNBTupleBucket) {
+
+            PNB pnbTuple = deletePNBTupleBucket->relationTuple;
+
+            char *playerIDDelete = pnbTuple->PlayerId;
+            char *playerNameDelete = pnbTuple->Name;
+            char *playerBirthDate = pnbTuple->BirthDate;
+
+            deletePNBTupleBucket = deletePNBTupleBucket->next;
+
+
+            deleteBucket(pnbRelation->playerIDHashTable, playerIDDelete, pnbTuple);
+            deleteBucket(pnbRelation->nameHashTable, playerNameDelete, pnbTuple);
+            deleteBucketandTuple(pnbRelation->birthDateHashTable, playerBirthDate, pnbTuple);
+            pnbRelation->entries--;
+
+
+        }
+
+        return true;
+
+    }
+
+    return false;
+}
 
 // Free PNB Relation
 void freePNBRelation(struct PNBRelation *pnbRelation) {
@@ -190,7 +251,10 @@ void freePNBRelation(struct PNBRelation *pnbRelation) {
         Bucket bucket = hashTable->table[i];
 
         while (bucket != NULL) {
-            freePNB((PNB) bucket->relationTuple);
+            if(bucket->relationTuple != NULL) {
+                freePNB((PNB) bucket->relationTuple);
+
+            }
             bucket = bucket->next;
         }
     }
@@ -209,6 +273,8 @@ void freePNB(PNB pnb) {
 // Print Function
 void printPNB(Bucket bucketPointer) {
     PNB tuple = (PNB) bucketPointer->relationTuple;
+    printf("Tuple Address: %p \n", tuple);
     printf("\n PlayerID: %s \n PlayerName: %s \n BirthDate: %s \n", tuple->PlayerId, tuple->Name, tuple->BirthDate);
+
 }
 

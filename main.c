@@ -25,6 +25,11 @@ void partA() {
         printf("Looking up TC Tuple with Team: Americans, City: Toronto\n\n");
         lookupTC("Americans", "Toronto", database);
 
+        // (d) lookup(<"*", "A. Moore", "28 Aug 1985">, PNB)
+        printf("\n----------Testing Lookup Function for PNB Relation-------------\n");
+        printf("Looking up PNB Tuple with PlayerID: *, Name: *, BirthDate: 28 Aug 1985\n\n");
+        lookupPNB("*", "*", "28 Aug 1985", database);
+
 
         printf("\n----------Testing Insertion-------------\n");
         // (g) insert(⟨“Ice Pilots”, “Pensacola”⟩, Team-City)
@@ -36,7 +41,28 @@ void partA() {
         printf("TC Relation after Insertion:\n");
         printTCRelation(database);
 
+
+        // Look Up (⟨∗, “Redwings”, “Crunch”, ∗⟩, GameId-HomeTeam-AwayTeam-Date) GHVD
+        printf("\n----------Testing Lookup Function for GHVD-------------\n");
+        printf("Looking up GHVD Tuple with GameID: *, HomeTeam: Redwings, AwayTeam: Crunch, Date: *\n\n");
+        lookupGHVD("*", "*", "Redwings", "10 Jan 2023", database);
+
+
+//        // Test Delete Repl
+//        deletePNB("75196", "A. Moore", "28 Aug 1985", database);
+
+//          // Test Delete TPN
+//          deleteTPN("Americans", "*", "*", database);
+
+        printf("\n----------Testing Delete Function for PNB Relation-------------\n");
+        deletePNBREPL(database);
+
+//        printf("\n----------Testing Delete Function for TPN Relation-------------\n");
+//        deleteTPNREPL(database);
+
         destroyDatabase(database);
+
+
 
         printf("\n--------------------------------------------------------------\n");
 
@@ -68,7 +94,7 @@ void partB() {
 int main() {
     clock_t start_time = clock();
     partA();
-    partB();
+//    partB();
     clock_t end_time = clock();
     double time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
     printf("Time taken: %f seconds \n", time);

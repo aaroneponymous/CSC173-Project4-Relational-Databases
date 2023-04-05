@@ -143,6 +143,48 @@ bool insertJoinGHVDPG(char* gameId, char* homeTeam, char* visitorTeam, char* dat
     return true;
 }
 
+
+AllofTheAbove newAllofTheAbove(char* playerId, char* goals) {
+    AllofTheAbove allofTheAbove = (AllofTheAbove) malloc(sizeof(struct AllofTheAbove));
+    strcpy(allofTheAbove->PlayerId, playerId);
+    strcpy(allofTheAbove->Goals, goals);
+    return allofTheAbove;
+}
+AllofTheAboveRelation newAllofTheAboveRelation(int capacity) {
+    AllofTheAboveRelation allofTheAboveRelation = (AllofTheAboveRelation) malloc(sizeof(struct AllofTheAboveRelation));
+    allofTheAboveRelation->capacity = capacity;
+    allofTheAboveRelation->entries = 0;
+    allofTheAboveRelation->playerIdHashTable = newHashTable(capacity);
+    allofTheAboveRelation->goalsHashTable = newHashTable(capacity);
+    return allofTheAboveRelation;
+}
+bool insertAllofTheAbove(char* playerId, char* goals, AllofTheAboveRelation allofTheAboveRelation) {
+    Bucket bucket = lookUpBucket(allofTheAboveRelation->playerIdHashTable, allofTheAboveRelation->capacity, playerId);
+
+    if (bucket) {
+        while (bucket) {
+            AllofTheAbove allofTheAbove = bucket->relationTuple;
+            if (strcmp(allofTheAbove->PlayerId, playerId) == 0 && strcmp(allofTheAbove->Goals, goals) == 0) {
+                printf("\nDuplicate Exists, Insert Unsuccessful!\n");
+                return false;
+            }
+            bucket = bucket->next;
+        }
+    }
+
+    AllofTheAbove newAllofTheAboveTuple = newAllofTheAbove(playerId, goals);
+    insert(allofTheAboveRelation->playerIdHashTable, playerId, newAllofTheAboveTuple);
+    insert(allofTheAboveRelation->goalsHashTable, goals, newAllofTheAboveTuple);
+    allofTheAboveRelation->entries++;
+
+    printf("\n\nDuplicate Doesn't Exist, Insert Successful!\n");
+    printf("Entries in AllofTheAbove Relation: %d\n\n", allofTheAboveRelation->entries);
+
+    return true;
+
+}
+
+
 // Select
 TPNRelation select_TPN(char* playerID, TPNRelation tpnRelation) {
 
@@ -231,9 +273,84 @@ JoinGHVDPGRelation join_GHVDPG(GHVDRelation ghvdRelation, GPGRelation gpgRelatio
     return newJoinRelation;
 }
 
+// All of the Above
+// Takes in a date and a join relation
+// Selects Tuples from the join relation that have the same date
+// Projects the selected tuples to get the playerID and goals
+AllofTheAboveRelation relational_all_of_the_above(char* date, JoinGHVDPGRelation joinGHVDPGRelation) {
+
+    AllofTheAboveRelation allofTheAboveRelation = newAllofTheAboveRelation(MAX_TABLE_SIZE);
+    HashTable JoinedHashTable = joinGHVDPGRelation->playerIdHashTable;
+
+    // Run a for loop on the joinGHVDPGRelation->playerIdHashTable->table
+    // Check if the date is the same as the date in the tuple
+    // If yes insert it into the allofTheAboveRelation
+
+    for (int i = 0; i < joinGHVDPGRelation->capacity; i++) {
+
+        Bucket joinGHVDPGBucket = JoinedHashTable->table[i];
+
+        if (joinGHVDPGBucket) {
+            while (joinGHVDPGBucket) {
+                JoinGHVDPG joinGHVDPG = joinGHVDPGBucket->relationTuple;
+                if (strcmp(joinGHVDPG->Date, date) == 0) {
+                    insertAllofTheAbove(joinGHVDPG->PlayerId, joinGHVDPG->Goals, allofTheAboveRelation);
+                }
+                joinGHVDPGBucket = joinGHVDPGBucket->next;
+            }
+
+        }
+    }
+
+    if (allofTheAboveRelation->entries == 0) {
+        return NULL;
+    }
+
+    return allofTheAboveRelation;
+
+}
 
 
 
+void printAllofTheAbove(Bucket allofTheAbove) {
+    AllofTheAbove allofTheAboveTuple = allofTheAbove->relationTuple;
+    printf("Tuple Address: %p \n", allofTheAboveTuple);
+    printf("\n PlayerId: %s \n", allofTheAboveTuple->PlayerId);
+    printf("\n Goals: %s \n", allofTheAboveTuple->Goals);
+}
+void printAllofTheAboveRelation(AllofTheAboveRelation allofTheAboveRelation) {
+
+    for (int i = 0; i < allofTheAboveRelation->capacity; i++) {
+        Bucket allofTheAboveBucket = allofTheAboveRelation->playerIdHashTable->table[i];
+        if (allofTheAboveBucket) {
+            while (allofTheAboveBucket) {
+                printAllofTheAbove(allofTheAboveBucket);
+                allofTheAboveBucket = allofTheAboveBucket->next;
+            }
+        }
+    }
+
+}
+void freeAllofTheAboveRelation(AllofTheAboveRelation allofTheAboveRelation) {
+
+    for (int i = 0; i < allofTheAboveRelation->capacity; i++) {
+        Bucket allofTheAboveBucket = allofTheAboveRelation->playerIdHashTable->table[i];
+        if (allofTheAboveBucket) {
+            while (allofTheAboveBucket) {
+                free(allofTheAboveBucket->relationTuple);
+                allofTheAboveBucket = allofTheAboveBucket->next;
+            }
+        }
+    }
+
+    freeHashTable(allofTheAboveRelation->playerIdHashTable);
+    freeHashTable(allofTheAboveRelation->goalsHashTable);
+    free(allofTheAboveRelation);
+
+}
+void freeAllofTheAbove(AllofTheAbove allofTheAbove) {
+    free(allofTheAbove);
+}
 
 void printJoinGHVDPG(Bucket joinGHVDPG) {
     JoinGHVDPG joinGHVDPGTuple = joinGHVDPG->relationTuple;
@@ -245,7 +362,6 @@ void printJoinGHVDPG(Bucket joinGHVDPG) {
     printf("\n PlayerId: %s \n", joinGHVDPGTuple->PlayerId);
     printf("\n Goals: %s \n", joinGHVDPGTuple->Goals);
 }
-
 void printJoinGHVDPGRelation(JoinGHVDPGRelation joinGHVDPGRelation) {
     HashTable table = joinGHVDPGRelation->gameIdHashTable;
     printf("\n\nPrinting JoinGHVDPG Relation Tuples:\n");
@@ -258,7 +374,6 @@ void printJoinGHVDPGRelation(JoinGHVDPGRelation joinGHVDPGRelation) {
         }
     }
 }
-
 void freeJoinGHVDPGRelation(JoinGHVDPGRelation joinGHVDPGRelation) {
 
     HashTable table = joinGHVDPGRelation->gameIdHashTable;
@@ -281,15 +396,12 @@ void freeJoinGHVDPG(JoinGHVDPG joinGHVDPG) {
     free(joinGHVDPG);
 }
 
-
-// Print Function
 void printProjectedTNP(Bucket bucketPointer) {
     ProjectionTPN projectedTuple = (ProjectionTPN) bucketPointer->relationTuple;
     printf("Tuple Address: %p \n", projectedTuple);
     printf("\n Team: %s \n", projectedTuple->Team);
 
 }
-// Print the HashTable PIB
 void printProjectedTPN(ProjectionTPNRelation relation) {
     HashTable table = relation->teamHashTable;
     printf("\n\nPrinting Projected Relation Tuples for Player ID %s:\n", relation->key);
@@ -303,7 +415,6 @@ void printProjectedTPN(ProjectionTPNRelation relation) {
         }
     }
 }
-// Free PNB Relation
 void freeProjectedTPNRelation(ProjectionTPNRelation tpnProjectedrelation) {
 
     // Free the Bucket->Value

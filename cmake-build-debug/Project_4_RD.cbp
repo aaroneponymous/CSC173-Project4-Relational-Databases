@@ -115,6 +115,12 @@
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/Query.h">
 			<Option target="Project_4_RD"/>
 		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/RelationalAlgebra.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/RelationalAlgebra.h">
+			<Option target="Project_4_RD"/>
+		</Unit>
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/TCRelation.c">
 			<Option target="Project_4_RD"/>
 		</Unit>

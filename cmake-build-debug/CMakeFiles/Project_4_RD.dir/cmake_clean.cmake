@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Project_4_RD.dir/PNBRelation.c.o.d"
   "CMakeFiles/Project_4_RD.dir/Query.c.o"
   "CMakeFiles/Project_4_RD.dir/Query.c.o.d"
+  "CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.o"
+  "CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.o.d"
   "CMakeFiles/Project_4_RD.dir/TCRelation.c.o"
   "CMakeFiles/Project_4_RD.dir/TCRelation.c.o.d"
   "CMakeFiles/Project_4_RD.dir/TPNRelation.c.o"

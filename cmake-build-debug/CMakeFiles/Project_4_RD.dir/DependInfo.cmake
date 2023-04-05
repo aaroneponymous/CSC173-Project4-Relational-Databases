@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/HashTable.c" "CMakeFiles/Project_4_RD.dir/HashTable.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/HashTable.c.o.d"
   "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/PNBRelation.c" "CMakeFiles/Project_4_RD.dir/PNBRelation.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/PNBRelation.c.o.d"
   "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/Query.c" "CMakeFiles/Project_4_RD.dir/Query.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/Query.c.o.d"
+  "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/RelationalAlgebra.c" "CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.o.d"
   "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/TCRelation.c" "CMakeFiles/Project_4_RD.dir/TCRelation.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/TCRelation.c.o.d"
   "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/TPNRelation.c" "CMakeFiles/Project_4_RD.dir/TPNRelation.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/TPNRelation.c.o.d"
   "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/main.c" "CMakeFiles/Project_4_RD.dir/main.c.o" "gcc" "CMakeFiles/Project_4_RD.dir/main.c.o.d"

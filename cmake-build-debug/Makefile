@@ -297,6 +297,30 @@ Query.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/Query.c.s
 .PHONY : Query.c.s
 
+RelationalAlgebra.o: RelationalAlgebra.c.o
+.PHONY : RelationalAlgebra.o
+
+# target to build an object file
+RelationalAlgebra.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.o
+.PHONY : RelationalAlgebra.c.o
+
+RelationalAlgebra.i: RelationalAlgebra.c.i
+.PHONY : RelationalAlgebra.i
+
+# target to preprocess a source file
+RelationalAlgebra.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.i
+.PHONY : RelationalAlgebra.c.i
+
+RelationalAlgebra.s: RelationalAlgebra.c.s
+.PHONY : RelationalAlgebra.s
+
+# target to generate assembly for a file
+RelationalAlgebra.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/RelationalAlgebra.c.s
+.PHONY : RelationalAlgebra.c.s
+
 TCRelation.o: TCRelation.c.o
 .PHONY : TCRelation.o
 
@@ -399,6 +423,9 @@ help:
 	@echo "... Query.o"
 	@echo "... Query.i"
 	@echo "... Query.s"
+	@echo "... RelationalAlgebra.o"
+	@echo "... RelationalAlgebra.i"
+	@echo "... RelationalAlgebra.s"
 	@echo "... TCRelation.o"
 	@echo "... TCRelation.i"
 	@echo "... TCRelation.s"

@@ -194,6 +194,8 @@ void printHashTableTPN(HashTable table) {
 
 // Print the HashTable TC
 void printHashTableTC(HashTable table) {
+    printf("\n\nPrinting TC Relation Tuples:\n");
+    printf("\nEntries in TC Relation: %d\n\n", table->entries);
     for (int i = 0; i < table->capacity; i++) {
         Bucket current = table->table[i];
         while (current != NULL) {
@@ -205,6 +207,8 @@ void printHashTableTC(HashTable table) {
 
 // Print the HashTable GHVD
 void printHashTableGHVD(HashTable table) {
+    printf("\n\nPrinting GHVD Relation Tuples:\n");
+    printf("\nEntries in GHVD Relation: %d\n\n", table->entries);
     for (int i = 0; i < table->capacity; i++) {
         Bucket current = table->table[i];
         while (current != NULL) {
@@ -216,6 +220,8 @@ void printHashTableGHVD(HashTable table) {
 
 // Print the HashTable GPG
 void printHashTableGPG(HashTable table) {
+    printf("\n\nPrinting GPG Relation Tuples:\n");
+    printf("\nEntries in GPG Relation: %d\n\n", table->entries);
     for (int i = 0; i < table->capacity; i++) {
         Bucket current = table->table[i];
         while (current != NULL) {

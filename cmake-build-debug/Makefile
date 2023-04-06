@@ -153,6 +153,30 @@ Database.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/Database.c.s
 .PHONY : Database.c.s
 
+GHVDDelete.o: GHVDDelete.c.o
+.PHONY : GHVDDelete.o
+
+# target to build an object file
+GHVDDelete.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/GHVDDelete.c.o
+.PHONY : GHVDDelete.c.o
+
+GHVDDelete.i: GHVDDelete.c.i
+.PHONY : GHVDDelete.i
+
+# target to preprocess a source file
+GHVDDelete.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/GHVDDelete.c.i
+.PHONY : GHVDDelete.c.i
+
+GHVDDelete.s: GHVDDelete.c.s
+.PHONY : GHVDDelete.s
+
+# target to generate assembly for a file
+GHVDDelete.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Project_4_RD.dir/build.make CMakeFiles/Project_4_RD.dir/GHVDDelete.c.s
+.PHONY : GHVDDelete.c.s
+
 GHVDLookUp.o: GHVDLookUp.c.o
 .PHONY : GHVDLookUp.o
 
@@ -405,6 +429,9 @@ help:
 	@echo "... Database.o"
 	@echo "... Database.i"
 	@echo "... Database.s"
+	@echo "... GHVDDelete.o"
+	@echo "... GHVDDelete.i"
+	@echo "... GHVDDelete.s"
 	@echo "... GHVDLookUp.o"
 	@echo "... GHVDLookUp.i"
 	@echo "... GHVDLookUp.s"

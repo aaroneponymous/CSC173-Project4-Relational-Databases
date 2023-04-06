@@ -8,6 +8,7 @@
 #include "Query.h"
 #include "RelationalAlgebra.h"
 
+
 void partA() {
     printf("\n----------------------------Part A----------------------------\n");
     Database database = createDatabase(MAX_TABLE_SIZE, "CSC173 RELATIONAL DATABASE");
@@ -52,20 +53,29 @@ void partA() {
 //        // Print Hash Table PNB->PlayerID
 //        printf("\n----------Testing Print Function for PNB Relation-------------\n");
 //        printHashTablePNB(database->pnbRelation->playerIDHashTable);
-
-
-
+//
+//
+//
 //        // Test Delete Repl
 //        deletePNB("75196", "A. Moore", "28 Aug 1985", database);
 
-//          // Test Delete TPN
-//          deleteTPN("Americans", "*", "*", database);
+    // Test Delete TPN
+    deleteTPN("Americans", "*", "*", database);
 
-//        printf("\n----------Testing Delete Function for PNB Relation-------------\n");
-//        deletePNBREPL(database);
+    // Test Delete GHWD
 
-//        printf("\n----------Testing Delete Function for TPN Relation-------------\n");
-//        deleteTPNREPL(database);
+//    (d) delete(⟨4, “Redwings”, “Maple Leafs”, “6 Jan 2023”⟩, GameId-HomeTeam-AwayTeam-Date)
+//    (e) delete(⟨∗, “Redwings”, “Crunch”, ∗⟩, GameId-HomeTeam-AwayTeam-Date)
+//    (f) delete(⟨∗, “Americans”, ∗, ∗⟩, GameId-HomeTeam-AwayTeam-Date)
+
+    printf("\n----------Testing Delete Function for GHVD Relation-------------\n");
+    printf("\nDeleting GHVD Tuple with GameID: 4, HomeTeam: Redwings, AwayTeam: Maple Leafs, Date: 6 Jan 2023");
+    deleteGHVD("4", "Redwings", "Maple Leafs", "6 Jan 2023", database);
+    printf("\nDeleting GHVD Tuple with GameID: *, HomeTeam: Redwings, AwayTeam: Crunch, Date: *");
+    deleteGHVD("*", "Redwings", "Crunch", "*", database);
+    printf("\nDeleting GHVD Tuple with GameID: *, HomeTeam: Americans, AwayTeam: *, Date: *");
+    deleteGHVD("*", "Americans", "*", "*", database);
+
 
     destroyDatabase(database);
 
@@ -141,8 +151,8 @@ void partC() {
 int main() {
     clock_t start_time = clock();
     partA();
-    partB();
-    partC();
+//    partB();
+//    partC();
     clock_t end_time = clock();
     double time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
     printf("Time taken: %f seconds \n", time);

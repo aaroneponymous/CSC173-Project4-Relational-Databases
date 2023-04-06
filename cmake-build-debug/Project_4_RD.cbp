@@ -82,6 +82,9 @@
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/Database.h">
 			<Option target="Project_4_RD"/>
 		</Unit>
+		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GHVDDelete.c">
+			<Option target="Project_4_RD"/>
+		</Unit>
 		<Unit filename="/mnt/c/Aaron&apos;s Folder/Relational_Databases/Project_4_RD/GHVDLookUp.c">
 			<Option target="Project_4_RD"/>
 		</Unit>

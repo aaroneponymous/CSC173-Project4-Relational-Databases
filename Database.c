@@ -342,6 +342,12 @@ void deleteTPNREPL(Database database) {
     }
 }
 
+void deleteGHVD(char *gameID, char *homeTeam, char *visitorTeam, char *date, Database database) {
+    // Call delete_GHVD from GHVD relation file
+    delete_GHVD(gameID, homeTeam, visitorTeam, date, database->ghvdRelation);
+    printGHVDRelation(database);
+}
+
 
 
 void printPNBRelation(Database database) {
@@ -357,6 +363,11 @@ void printTPNRelation(Database database) {
 void printTCRelation(Database database) {
     // Call printTCRelation function from HashTable.c
     printHashTableTC(database->tcRelation->teamHashTable);
+}
+
+void printGHVDRelation(Database database) {
+    // Call printGHVDRelation function from HashTable.c
+    printHashTableGHVD(database->ghvdRelation->gameIdHashTable);
 }
 
 

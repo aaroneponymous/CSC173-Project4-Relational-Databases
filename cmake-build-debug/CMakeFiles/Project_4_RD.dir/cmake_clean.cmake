@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Project_4_RD.dir/Database.c.o"
   "CMakeFiles/Project_4_RD.dir/Database.c.o.d"
+  "CMakeFiles/Project_4_RD.dir/GHVDDelete.c.o"
+  "CMakeFiles/Project_4_RD.dir/GHVDDelete.c.o.d"
   "CMakeFiles/Project_4_RD.dir/GHVDLookUp.c.o"
   "CMakeFiles/Project_4_RD.dir/GHVDLookUp.c.o.d"
   "CMakeFiles/Project_4_RD.dir/GHVDRelation.c.o"

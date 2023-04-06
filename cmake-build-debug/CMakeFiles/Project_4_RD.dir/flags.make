@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/mnt/c/Project_4/Project_4_RD/.
 
 C_FLAGS = -g -std=gnu99 -fdiagnostics-color=always
 

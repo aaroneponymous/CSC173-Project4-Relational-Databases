@@ -1,4 +1,10 @@
-C:\Windows\system32\wsl.exe --distribution Debian --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd '/mnt/c/Aaron'\"'\"'s Folder/Relational_Databases/Project_4_RD/cmake-build-debug' && /home/apaul9/cmake-3.26.1/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -S '/mnt/c/Aaron'\"'\"'s Folder/Relational_Databases/Project_4_RD' -B '/mnt/c/Aaron'\"'\"'s Folder/Relational_Databases/Project_4_RD/cmake-build-debug'"
--- Configuring done (0.1s)
+C:\Windows\system32\wsl.exe --distribution Debian --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /mnt/c/Project_4/Project_4_RD/cmake-build-debug && /home/apaul9/cmake-3.26.1/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -S /mnt/c/Project_4/Project_4_RD -B /mnt/c/Project_4/Project_4_RD/cmake-build-debug"
+-- The C compiler identification is GNU 10.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (1.3s)
 -- Generating done (0.1s)
--- Build files have been written to: /mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/cmake-build-debug
+-- Build files have been written to: /mnt/c/Project_4/Project_4_RD/cmake-build-debug

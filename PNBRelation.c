@@ -187,7 +187,6 @@ bool delete_PNB(char* playerId, char* playerName, char* birthDate, struct PNBRel
             // Check: If the name and birthDate match the name and birthDate in the bucket
             PNB pnbFirst = (PNB)deletePNBTupleBucket->relationTuple;
             PNB pnbSecond = (PNB)deletePNBTupleBucket->next->relationTuple;
-            char *playerIDDelete = pnbFirst->PlayerId;
             char *playerNameDelete = pnbFirst->Name;
             char *playerBirthDate = pnbFirst->BirthDate;
 
@@ -273,7 +272,6 @@ void freePNB(PNB pnb) {
 // Print Function
 void printPNB(Bucket bucketPointer) {
     PNB tuple = (PNB) bucketPointer->relationTuple;
-    printf("Tuple Address: %p \n", tuple);
     printf("\n PlayerID: %s \n PlayerName: %s \n BirthDate: %s \n", tuple->PlayerId, tuple->Name, tuple->BirthDate);
 
 }

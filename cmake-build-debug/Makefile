@@ -31,6 +31,9 @@ default_target: all
 
 .SUFFIXES: .hpux_make_needs_suffix_list
 
+# Produce verbose output by default.
+VERBOSE = 1
+
 # Command-line flag to silence nested $(MAKE).
 $(VERBOSE)MAKESILENT = -s
 
@@ -57,10 +60,10 @@ RM = /home/apaul9/cmake-3.26.1/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD"
+CMAKE_SOURCE_DIR = /mnt/c/Project_4/Project_4_RD
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/cmake-build-debug"
+CMAKE_BINARY_DIR = /mnt/c/Project_4/Project_4_RD/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +90,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/cmake-build-debug/CMakeFiles" "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/cmake-build-debug//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Project_4/Project_4_RD/cmake-build-debug/CMakeFiles /mnt/c/Project_4/Project_4_RD/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/cmake-build-debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Project_4/Project_4_RD/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

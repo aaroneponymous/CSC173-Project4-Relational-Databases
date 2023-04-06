@@ -314,7 +314,6 @@ AllofTheAboveRelation relational_all_of_the_above(char* date, JoinGHVDPGRelation
 
 void printAllofTheAbove(Bucket allofTheAbove) {
     AllofTheAbove allofTheAboveTuple = allofTheAbove->relationTuple;
-    printf("Tuple Address: %p \n", allofTheAboveTuple);
     printf("\n PlayerId: %s \n", allofTheAboveTuple->PlayerId);
     printf("\n Goals: %s \n", allofTheAboveTuple->Goals);
 }
@@ -354,7 +353,6 @@ void freeAllofTheAbove(AllofTheAbove allofTheAbove) {
 
 void printJoinGHVDPG(Bucket joinGHVDPG) {
     JoinGHVDPG joinGHVDPGTuple = joinGHVDPG->relationTuple;
-    printf("Tuple Address: %p \n", joinGHVDPGTuple);
     printf("\n GameId: %s \n", joinGHVDPGTuple->GameId);
     printf("\n HomeTeam: %s \n", joinGHVDPGTuple->HomeTeam);
     printf("\n VisitorTeam: %s \n", joinGHVDPGTuple->VisitorTeam);
@@ -398,7 +396,6 @@ void freeJoinGHVDPG(JoinGHVDPG joinGHVDPG) {
 
 void printProjectedTNP(Bucket bucketPointer) {
     ProjectionTPN projectedTuple = (ProjectionTPN) bucketPointer->relationTuple;
-    printf("Tuple Address: %p \n", projectedTuple);
     printf("\n Team: %s \n", projectedTuple->Team);
 
 }

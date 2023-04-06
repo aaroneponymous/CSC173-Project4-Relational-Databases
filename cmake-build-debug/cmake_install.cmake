@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD
+# Install script for directory: /mnt/c/Project_4/Project_4_RD
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Aaron's Folder/Relational_Databases/Project_4_RD/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Project_4/Project_4_RD/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

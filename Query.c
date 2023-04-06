@@ -1,7 +1,3 @@
-#import <stdio.h>
-#import <stdlib.h>
-#import <string.h>
-
 #include "DataBase.h"
 #include "HashTable.h"
 #include "Query.h"

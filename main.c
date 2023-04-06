@@ -1,10 +1,6 @@
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <time.h>
 
+#include <time.h>
 #include "Database.h"
-#include "Hashtable.h"
 #include "Query.h"
 #include "RelationalAlgebra.h"
 
@@ -49,18 +45,8 @@ void partA() {
     printf("Looking up GHVD Tuple with GameID: *, HomeTeam: Redwings, AwayTeam: Crunch, Date: *\n\n");
     lookupGHVD("*", "*", "Redwings", "10 Jan 2023", database);
 
-
-//        // Print Hash Table PNB->PlayerID
-//        printf("\n----------Testing Print Function for PNB Relation-------------\n");
-//        printHashTablePNB(database->pnbRelation->playerIDHashTable);
-//
-//
-//
-//        // Test Delete Repl
-//        deletePNB("75196", "A. Moore", "28 Aug 1985", database);
-
     // Test Delete TPN
-    deleteTPN("Americans", "*", "*", database);
+     deleteTPN("Americans", "*", "*", database);
 
     // Test Delete GHWD
 
@@ -98,9 +84,6 @@ void partB() {
     printf("\n----------Testing REPL for TPN Relation-------------\n");
     qNameGoalsREPL(database);
 
-    qNameGoals("A. Moore", "3 Jan 2023", database);
-
-    qNameGoals("T. Sullivan", "3 Jan 2023", database);
 
     destroyDatabase(database);
 

@@ -118,12 +118,14 @@ void partC() {
     printf("\n----------(A) Testing Select Function for TPN Relation: Parameter Player ID: 51213------------\n");
     TPNRelation selectedTPNRelation = select_TPN("87977", database->tpnRelation);
     // Print the selected TPN Relation
+    printf("\nSelected TPN Relation after select function:\n");
     printHashTableTPN(selectedTPNRelation->playerIDHashTable);
 
     // (b) Projection for TPN
     printf("\n----------(B) Testing Projection Function for TPN Relation: Parameter Player ID: 51213------------\n");
     ProjectionTPNRelation projectedTPNRelation = project_TPN("51213", database->tpnRelation);
     // Print the projected TPN Relation
+    printf("\n-----------------Projected TPN Relation after projection function:--------------------------------\n");
     printProjectedTPN(projectedTPNRelation);
     freeProjectedTPNRelation(projectedTPNRelation);
 
@@ -151,8 +153,8 @@ void partC() {
 int main() {
     clock_t start_time = clock();
     partA();
-//    partB();
-//    partC();
+    partB();
+    partC();
     clock_t end_time = clock();
     double time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
     printf("Time taken: %f seconds \n", time);

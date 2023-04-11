@@ -401,9 +401,6 @@ bool delete_GHVD(char* gameId, char* homeTeam, char* visitorTeam, char* date, st
             Bucket bucket = lookUpBucket(ghvdRelation->gameIdHashTable, ghvdRelation->capacity, gameId);
             while (bucket != NULL) {
                 GHVD ghvd = (GHVD) bucket->relationTuple;
-                char *homeTeam = ghvd->HomeTeam;
-                char *visitorTeam = ghvd->VisitorTeam;
-                char *date = ghvd->Date;
 
                 if (strcmp(ghvd->HomeTeam, homeTeam) == 0 && strcmp(ghvd->VisitorTeam, visitorTeam) == 0) {
                     deleteBucket(ghvdRelation->gameIdHashTable, ghvd->GameId, ghvd);

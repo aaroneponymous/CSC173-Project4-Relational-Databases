@@ -10,6 +10,7 @@ void partA() {
     Database database = createDatabase(MAX_TABLE_SIZE, "CSC173 RELATIONAL DATABASE");
     loadDatabase(database);
 
+
     // (a) lookup(⟨“Americans”, 61367, 99⟩, Team-PlayerId-Number)
     printf("\n----------Testing Lookup Function for TPN Relation-------------\n");
     printf("Looking up TPN Tuple with Team: Americans, PlayerID: 61367, Number: 99\n\n");
@@ -23,11 +24,6 @@ void partA() {
     printf("Looking up TC Tuple with Team: Americans, City: Toronto\n\n");
     lookupTC("Americans", "Toronto", database);
 
-    // (d) lookup(<"*", "A. Moore", "28 Aug 1985">, PNB)
-    printf("\n----------Testing Lookup Function for PNB Relation-------------\n");
-    printf("Looking up PNB Tuple with PlayerID: *, Name: *, BirthDate: 28 Aug 1985\n\n");
-    lookupPNB("*", "*", "28 Aug 1985", database);
-
 
     printf("\n----------Testing Insertion-------------\n");
     // (g) insert(⟨“Ice Pilots”, “Pensacola”⟩, Team-City)
@@ -38,21 +34,10 @@ void partA() {
     insertTC("Crunch", "Syracuse", database);
     printf("TC Relation after Insertion:\n");
     printTCRelation(database);
+    deleteTPN("Americans", "*", "*", database);
 
-
-    // Look Up (⟨∗, “Redwings”, “Crunch”, ∗⟩, GameId-HomeTeam-AwayTeam-Date) GHVD
-    printf("\n----------Testing Lookup Function for GHVD-------------\n");
-    printf("Looking up GHVD Tuple with GameID: *, HomeTeam: Redwings, AwayTeam: Crunch, Date: *\n\n");
-    lookupGHVD("*", "*", "Redwings", "10 Jan 2023", database);
-
-    // Test Delete TPN
-     deleteTPN("Americans", "*", "*", database);
 
     // Test Delete GHWD
-
-//    (d) delete(⟨4, “Redwings”, “Maple Leafs”, “6 Jan 2023”⟩, GameId-HomeTeam-AwayTeam-Date)
-//    (e) delete(⟨∗, “Redwings”, “Crunch”, ∗⟩, GameId-HomeTeam-AwayTeam-Date)
-//    (f) delete(⟨∗, “Americans”, ∗, ∗⟩, GameId-HomeTeam-AwayTeam-Date)
 
     printf("\n----------Testing Delete Function for GHVD Relation-------------\n");
     printf("\nDeleting GHVD Tuple with GameID: 4, HomeTeam: Redwings, AwayTeam: Maple Leafs, Date: 6 Jan 2023");
@@ -61,8 +46,6 @@ void partA() {
     deleteGHVD("*", "Redwings", "Crunch", "*", database);
     printf("\nDeleting GHVD Tuple with GameID: *, HomeTeam: Americans, AwayTeam: *, Date: *");
     deleteGHVD("*", "Americans", "*", "*", database);
-
-
     destroyDatabase(database);
 
 
